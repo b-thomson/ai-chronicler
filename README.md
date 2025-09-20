@@ -20,3 +20,24 @@ python3 -m venv .venv
 source .venv/bin/activate   # On macOS/Linux OR
 .venv\Scripts\activate      # On Windows
 pip install -r requirements.txt
+
+## Usage
+
+Run the tool from the command line:
+
+```bash
+python -m ai_chronicler --help
+```
+
+Example commands (planned):
+
+```bash
+# Extract conversations into a single Markdown file
+python -m ai_chronicler extract --input data/input_zips --output data/output/all.md
+
+# Split conversations by day
+python -m ai_chronicler extract --split day
+
+# Split conversations by chat name
+python -m ai_chronicler extract --split chat
+```
