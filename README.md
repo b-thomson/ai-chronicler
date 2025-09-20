@@ -42,3 +42,8 @@ python -m ai_chronicler extract --split day
 # Split conversations by chat name
 python -m ai_chronicler extract --split chat
 ```
+
+## License
+
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+
