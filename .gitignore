@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual env
+.venv/
+env/
+
+# Data
+data/input_zips/
+data/cache/
+data/output/
+
+# OS / editor stuff
+.DS_Store
+.vscode/
