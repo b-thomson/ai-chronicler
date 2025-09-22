@@ -15,3 +15,4 @@ data/output/
 # OS / editor stuff
 .DS_Store
 .vscode/
+src/ai_chronicler/ai_chronicler.ipynb

@@ -1,0 +1,5 @@
+[paths]
+input_dir = "data/input_zips"
+extracted_dir = "data/cache/extracted"
+normalised_dir = "data/cache/normalised"
+output_dir = "data/output"
