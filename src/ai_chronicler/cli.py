@@ -4,6 +4,7 @@ from pathlib import Path
 
 from .extract import extract
 from .normalise import normalise
+from .merge_dedupe import merge_dedupe
 
 def load_config(path="ai_chronicler.toml"):
     with open(path, "rb") as f:
@@ -23,12 +24,15 @@ def main():
     extr_dir = args.extr_dir or Path(config["paths"]["extracted_dir"])
     norm_dir = args.norm_dir or Path(config["paths"]["normalised_dir"])
     out_dir = args.out_dir or Path(config["paths"]["output_dir"])
+    
     print(f"Extracting from {src_dir} → {extr_dir}")
     extract(src_dir=src_dir,out_dir=extr_dir)
 
     print(f"Normalising JSON files in {extr_dir}")
     normalise(src_dir=extr_dir,out_dir=norm_dir)
 
+    print(f"Merging and deduplication of JSON files in {norm_dir}")
+    merge_dedupe(src_dir=norm_dir,out_dir=out_dir)
    
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 
-def walk_json(mapping_dict, message_id):
+def walk_json(conversation_id, conversation_title, mapping_dict, message_id):
 
     out = []
     message_dict = mapping_dict[message_id]
@@ -15,6 +15,8 @@ def walk_json(mapping_dict, message_id):
             msg_speaker = message_dict["message"]["author"]["role"]
             msg = message_dict["message"]["content"]["parts"]
             record = {
+                "chat_id": conversation_id,
+                "chat_title": conversation_title,
                 "msg_id": msg_id,
                 "msg_ts": msg_ts,
                 "msg_speaker": msg_speaker,
@@ -25,16 +27,16 @@ def walk_json(mapping_dict, message_id):
 
     if message_dict["children"]:
         for child in message_dict["children"]:
-            out.extend(walk_json(mapping_dict, child))
+            out.extend(walk_json(conversation_id, conversation_title, mapping_dict, child))
 
     return out
 
 
 def normalise(src_dir: Path, out_dir: Path):
 
-    out = []
-
     for path in src_dir.glob("*.json"):
+
+        out = []
 
         with open(path, mode="r", encoding="utf-8") as read_file:
 
@@ -47,15 +49,9 @@ def normalise(src_dir: Path, out_dir: Path):
                         mapping_root_key = k
                         break
 
-                record = {
-                    "chat_id": item["conversation_id"],
-                    "chat_title": item["title"],
-                    "messages": walk_json(item["mapping"], mapping_root_key),
-                }
+                message_list = walk_json(item["conversation_id"], item["title"], item["mapping"], mapping_root_key)
+                out.extend(message_list)
 
-                out.append(record)
-
-            out_path = out_dir / path.name
-
-            with open(out_path, mode="w", encoding="utf-8") as write_file:
-                json.dump(out, write_file)
+        out_path = out_dir / path.name
+        with open(out_path, mode="w", encoding="utf-8") as write_file:
+            json.dump(out, write_file)
