@@ -2,4 +2,12 @@
 input_dir = "data/input_zips"
 extracted_dir = "data/cache/extracted"
 normalised_dir = "data/cache/normalised"
+merge_dir = "data/cache/merged"
 output_dir = "data/output"
+
+[splitters]
+day = "data/output/by_day"
+week = "data/output/by_week"
+month = "data/output/by_month"
+chat = "data/output/by_chat"
+user = "data/output/by_user"
